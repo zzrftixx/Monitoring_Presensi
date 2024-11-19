@@ -67,9 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   top: 20.0), // Menambahkan padding di atas
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  foregroundColor: const Color.fromARGB(255, 0, 0, 0),
                   backgroundColor:
-                      const Color.fromARGB(255, 0, 123, 255), // Warna teks
+                      const Color.fromARGB(255, 255, 255, 255), // Warna teks
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                         30.0), // Membuat sudut tombol lebih bulat
