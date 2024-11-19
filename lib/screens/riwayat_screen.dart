@@ -21,7 +21,7 @@ class RiwayatScreen extends StatelessWidget {
             child: ListTile(
               title: Text('Tanggal: ${riwayat.tanggal}'),
               subtitle: Text(
-                  'Hadir: ${riwayat.hadir}, Tidak Hadir: ${riwayat.tidakHadir}'),
+                  'Hadir: ${riwayat.siswaHadir.length}, Tidak Hadir: ${riwayat.siswaTidakHadir.length}'),
               onTap: () {
                 // Navigasi ke halaman detail
                 Navigator.push(
@@ -46,14 +46,6 @@ class DetailRiwayatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ambil daftar siswa dari provider
-    final kehadiranProvider = Provider.of<KehadiranProvider>(context);
-
-    // Filter siswa berdasarkan kehadiran
-    final siswaHadir = kehadiranProvider.siswa.where((s) => s.hadir).toList();
-    final siswaTidakHadir =
-        kehadiranProvider.siswa.where((s) => !s.hadir).toList();
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Detail Kehadiran'),
@@ -69,7 +61,7 @@ class DetailRiwayatScreen extends StatelessWidget {
             Text('Siswa Hadir:',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 10),
-            ...siswaHadir.map((siswa) => ListTile(
+            ...riwayat.siswaHadir.map((siswa) => ListTile(
                   title: Text(siswa.nama),
                   leading: Icon(Icons.check_circle, color: Colors.green),
                 )),
@@ -77,7 +69,7 @@ class DetailRiwayatScreen extends StatelessWidget {
             Text('Siswa Tidak Hadir:',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 10),
-            ...siswaTidakHadir.map((siswa) => ListTile(
+            ...riwayat.siswaTidakHadir.map((siswa) => ListTile(
                   title: Text(siswa.nama),
                   leading: Icon(Icons.cancel, color: Colors.red),
                 )),

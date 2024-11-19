@@ -51,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(kehadiranProvider.siswa[index].nama),
+                  subtitle: Text(kehadiranProvider.siswa[index].nim),
                   trailing: Checkbox(
                     value: kehadiranProvider.siswa[index].hadir,
                     onChanged: (value) {
@@ -61,32 +62,41 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.blue, // Warna teks
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                    30.0), // Membuat sudut tombol lebih bulat
-              ),
-              padding: EdgeInsets.symmetric(
-                  horizontal: 20, vertical: 25), // Padding tombol
-            ),
-            onPressed: kehadiranProvider.siswa.isEmpty
-                ? null
-                : () {
-                    kehadiranProvider.simpanKehadiran();
-                  },
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.save, size: 24), // Menambahkan ikon simpan
-                SizedBox(width: 10), // Jarak antara ikon dan teks
-                Text('Simpan Kehadiran',
-                    style: TextStyle(fontSize: 18)), // Ukuran teks
-              ],
-            ),
-          ),
+          Padding(
+              padding: const EdgeInsets.only(
+                  top: 20.0), // Menambahkan padding di atas
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  backgroundColor:
+                      const Color.fromARGB(255, 0, 123, 255), // Warna teks
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        30.0), // Membuat sudut tombol lebih bulat
+                  ),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 30, vertical: 15), // Padding tombol
+                  elevation: 8, // Menambahkan bayangan yang lebih besar
+                ),
+                onPressed: kehadiranProvider.siswa.isEmpty
+                    ? null
+                    : () {
+                        kehadiranProvider.simpanKehadiran();
+                      },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.save, size: 24), // Menambahkan ikon simpan
+                    SizedBox(width: 10), // Jarak antara ikon dan teks
+                    Text(
+                      'Simpan Kehadiran',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold), // Ukuran dan tebal teks
+                    ),
+                  ],
+                ),
+              ))
         ],
       );
     } else {
