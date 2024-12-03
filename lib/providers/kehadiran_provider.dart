@@ -56,7 +56,7 @@ class KehadiranProvider with ChangeNotifier {
     Siswa(nama: 'Citra', nim: '362358302303'),
     Siswa(nama: 'Andra', nim: '362358302404'),
     Siswa(nama: 'Dony', nim: '362358302505'),
-    Siswa(nama: 'Setiwan', nim: '362358302606'),
+    Siswa(nama: 'Setiawan', nim: '362358302606'),
   ];
 
   List<Riwayat> _riwayat = [];
@@ -79,7 +79,7 @@ class KehadiranProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void simpanKehadiran() {
+  void simpanKehadiran(Function(List<Siswa>, List<Siswa>) onSaved) {
     List<Siswa> siswaHadir = _siswa.where((s) => s.hadir).toList();
     List<Siswa> siswaTidakHadir = _siswa.where((s) => !s.hadir).toList();
 
@@ -91,5 +91,22 @@ class KehadiranProvider with ChangeNotifier {
 
     _siswa.forEach((s) => s.hadir = false); // Reset kehadiran
     notifyListeners();
+
+    // Panggil callback untuk mengembalikan siswa yang hadir dan tidak hadir
+    onSaved(siswaHadir, siswaTidakHadir);
   }
 }
+
+  // void simpanKehadiran() {
+  //   List<Siswa> siswaHadir = _siswa.where((s) => s.hadir).toList();
+  //   List<Siswa> siswaTidakHadir = _siswa.where((s) => !s.hadir).toList();
+
+  //   _riwayat.add(Riwayat(
+  //     tanggal: DateTime.now().toString(),
+  //     siswaHadir: siswaHadir,
+  //     siswaTidakHadir: siswaTidakHadir,
+  //   ));
+
+  //   _siswa.forEach((s) => s.hadir = false); // Reset kehadiran
+  //   notifyListeners();
+  // }
